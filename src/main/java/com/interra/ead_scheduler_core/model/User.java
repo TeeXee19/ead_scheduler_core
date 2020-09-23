@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.Set;
 
 @Data
@@ -32,6 +33,10 @@ public class User {
     @NotEmpty(message = "*Please provide your last name")
     private String lastName;
 
+    @Column(name = "other_name")
+    @NotEmpty(message = "*Please provide your last name")
+    private String otherName;
+
     @Column(name = "user_name")
     @Length(min = 5, message = "*Your user name must have at least 5 characters")
     @NotEmpty(message = "*Please provide a user name")
@@ -47,8 +52,21 @@ public class User {
     @NotEmpty(message = "*Please provide your password")
     private String password;
 
-    @Column(name = "active")
-    private Boolean active;
+    @Column(name = "phone_number")
+    @Pattern(regexp = "^(\\(?\\+?[0-9]*\\)?)?[0-9_\\- \\(\\)]*$", message="{invalid.phonenumber}")
+    private String phoneNumber;
+
+    @Column(name = "skill")
+    private String skill;
+
+    @Column(name = "password_reset_token")
+    private String passwordResetToken;
+
+    @Column(name = "activation_token")
+    private String activationToken;
+
+    @Column(name = "status")
+    private Boolean status;
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))

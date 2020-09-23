@@ -30,8 +30,25 @@ public class Task {
     private String description;
 
     @Column(name = "start_date")
+    @NotEmpty(message = "*Please provide the start cdate")
     private Date start_date;
 
     @Column(name = "end_date")
+    @NotEmpty(message = "*Please provide the end date")
     private Date end_date;
+
+    @Column(name = "approval_status")
+    private Boolean approvalStatus;
+
+    @Column(name = "duration")
+    private int duration;
+
+    @Column(name = "progress")
+    private int progress;
+
+    @Column(name = "uncomp_task")
+    private String uncompletedTask;
+
+    @Column(name = "comp_task")
+    private String completedTask;
 }
