@@ -1,20 +1,10 @@
 package com.interra.ead_scheduler_core.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -83,4 +73,33 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+	
+
+	public void setPassword(String password) {
+        this.password = password;
+	}
+
+	public void setActive(boolean b) {
+        this.status = b;
+	}
+
+	public void setRoles(HashSet<Role> hashSet) {
+        this.roles = hashSet;
+	}
+
+    public Set<Role> getRoles() {
+            return roles;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public boolean getActive() {
+            return false;
+        }
 }
