@@ -36,4 +36,20 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
          }
+         
+         @Override
+protected void configure (AuthenticationManagerBuilder auth) throws Exception{
+ auth.authenticationProvider(authenticationProvider());
+
+}
+
+
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests().antMatchers("/superreg**","/registration**", "/js/**","/css/**", "/img/**","/webjars/**").permitAll().antMatchers("/adindex**", "/speclist**").hasAnyAuthority("ROLE_ADMIN").anyRequest()
+        .authenticated().and().formLogin().loginPage("/login").successHandler(successHandler).permitAll().and().logout()
+        .invalidateHttpSession(true).clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+        .logoutSuccessUrl("/login?logout").and().exceptionHandling().accessDeniedPage("/access-denied");
+    }
 }

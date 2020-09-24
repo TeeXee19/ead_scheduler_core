@@ -1,6 +1,5 @@
 package com.interra.ead_scheduler_core.service;
 
-
 import com.interra.ead_scheduler_core.model.*;
 import com.interra.ead_scheduler_core.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -32,6 +32,12 @@ public class UserService {
 
     public User findUserByUserName(String userName) {
         return userRepository.findByUserName(userName);
+    }
+    public  List <User> findAllUsers(){
+
+        
+    return userRepository.findAll();
+    
     }
 
     public User saveUser(User user) {
